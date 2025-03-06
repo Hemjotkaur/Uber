@@ -10,6 +10,10 @@ dotenv.config();
                 first_name:{
                     type:String,
                     required:true,
+                },
+                last_name:{
+                    type:String,
+                    required:true,   
                 }
             },
             email:{
@@ -34,11 +38,11 @@ userSchema.methods.generatorJWT = function () {
 
 
 
-userSchema.methods.hashPassword = async function (passwors) {
+userSchema.statics.hashPassword = async function (password) {
     return await bcrpyt.hash(password,10);
 };
 
-userSchema.methods.comparePassword = async function(passwors) {
+userSchema.methods.comparePassword = async function(password) {
     return await bcrpyt.hash(password, this.password);
 };
 
