@@ -27,4 +27,13 @@ const getUserByEmail = async (email) => {
     }
 }
 
-module.exports = { createUser, getUserByEmail };
+const getUserbyId = async(userId)=>{
+    try{
+        const user = await User.findById(userId);  
+        return user;
+    }catch(error){
+        console.log("Error",error)
+    }
+}
+
+module.exports = { createUser, getUserByEmail ,getUserbyId};
