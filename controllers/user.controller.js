@@ -81,8 +81,9 @@ const loginUser = async (req, res) => {
 };
 
 const getProfile = async (req, res) => {
-  const userId = req.body.userid;
+  const userId = req.user.id;
   // consol("User",userId);
+//   console.log(userId);
   try {
     const user = await getUserbyId(userId);
     return res.status(200).json({
@@ -99,7 +100,7 @@ const getProfile = async (req, res) => {
     });
   }
 
-  
+
 };
 
 module.exports = { registerUser, loginUser, getProfile };
