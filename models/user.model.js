@@ -36,8 +36,6 @@ userSchema.methods.generatorJWT = function () {
     });
 };
 
-
-
 userSchema.statics.hashPassword = async function (password) {
     return await bcrpyt.hash(password,10);
 };
