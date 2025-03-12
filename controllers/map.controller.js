@@ -1,5 +1,5 @@
 const axios = require("axios");
-
+const {metreToKilometer,convertTime }= require("../utils/utils.js")
 const {getDistanceTime} = require("../services/maps.service")
 
 const getCoordinates = async(req,res)=>{
@@ -37,8 +37,22 @@ const getDistanceTimeController = async(req,res)=> {
 const distanceTime = await getDistanceTime(origin,destination);
 
 
-console.log("Distance ",distanceTime.routes[0].distance);
-console.log("Time ",distanceTime.routes[0].duration);
+// console.log("Distance ",distanceTime.routes[0].distance);
+// console.log("Time ",distanceTime.routes[0].duration);
+
+    const distance = distanceTime.routes[0].distance;
+    const duration = distanceTime.routes[0].duration;
+
+    return res.status(200).json ({
+        distance:{
+            text: metreToKilometer(distance),
+            value:distance
+        },
+        duration:{
+            text: convertTime(duration),
+            value: duration
+        }
+    })
 }
 
 module.exports={

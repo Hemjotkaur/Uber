@@ -30,11 +30,14 @@ const getDistanceTime = async(origin,destination) => {
         const originCoordinates = await getCoordinates(origin);
         const destinationCoordinates = await getCoordinates(destination);
 
-        // console.log("Origin Coordinates: ", originCoordinates);
-        // console.log("Destination Coordinates: ", destinationCoordinates);
+        console.log("Origin Coordinates: ", originCoordinates);
+        console.log("Destination Coordinates: ", destinationCoordinates);
     
         const url =`https://router.project-osrm.org/route/v1/driving/${originCoordinates.lon},${originCoordinates.lat};${destinationCoordinates.lon},${destinationCoordinates.lat}?overview=false`;
         const response = await axios.get(url);
+        if(response.data.code !== "Ok") {
+            throw new Error("Error fetching distance and time");
+        }
         return response.data;
     }
     catch(error){
