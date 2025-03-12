@@ -6,7 +6,7 @@ const connectDB = require("./config/db");
 const userRoutes = require("./routes/user.routes");
 const captainRoutes = require("./routes/captain.routes")
 const bodyParser = require("body-parser");
-
+const mapRoutes = require('./routes/maps.routes')
 
 const app = express();
 connectDB();
@@ -16,5 +16,5 @@ app.use(bodyParser.json());
 app.use('/api/users', userRoutes);
 
 app.use('/api/captain',captainRoutes);
-
+app.use('/api/maps',mapRoutes);
 module.exports = app;
