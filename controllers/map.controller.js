@@ -1,5 +1,7 @@
 const axios = require("axios");
 
+const {getDistanceTime} = require("../services/maps.service")
+
 const getCoordinates = async(req,res)=>{
     const {address} =req.query;
     console.log("Address:",address);
@@ -27,7 +29,20 @@ const getCoordinates = async(req,res)=>{
 
 }
 
+const getDistanceTimeController = async(req,res)=> {
+ const {origin,destination} =req.query;
+
+//  console.log("Origin",origin);
+//  console.log("Destination",destination);
+const distanceTime = await getDistanceTime(origin,destination);
+
+
+console.log("Distance ",distanceTime.routes[0].distance);
+console.log("Time ",distanceTime.routes[0].duration);
+}
+
 module.exports={
-    getCoordinates
+    getCoordinates,
+    getDistanceTimeController
 }
  
